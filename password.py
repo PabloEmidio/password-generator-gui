@@ -10,16 +10,16 @@ def GerarSenha(quantoNumero=0, quantoSimbolo=0, quantoMaiusculo=0, quantoMinuscu
         op = choice([1, 2, 3, 4])
         gera = ''
         if op == 1 and quantoNumero > quantoNum:
-            gera = gerarNumeros(quantoNumero)
+            gera = gerarNumeros()
             quantoNum += 1
         elif op == 2 and quantoSimbolo > quantoSimb:
-            gera = gerarSimbolo(quantoSimbolo)
+            gera = gerarSimbolo()
             quantoSimb += 1
         elif op == 3 and quantoMaiusculo > quantoMaius:
-            gera = gerarMaiusculo(quantoMaiusculo)
+            gera = gerarMaiusculo()
             quantoMaius += 1
         elif op == 4 and quantoMinusculo > quantoMinus:
-            gera = gerarMinusculo(quantoMinusculo)
+            gera = gerarMinusculo()
             quantoMinus += 1
         senha.append(gera)
 
@@ -30,19 +30,20 @@ def GerarSenha(quantoNumero=0, quantoSimbolo=0, quantoMaiusculo=0, quantoMinuscu
     return senha
 
 
-def gerarNumeros(quanto):
+def gerarNumeros():
+
     opcoes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
     return choice(opcoes)
 
 
-def gerarSimbolo(quanto):
+def gerarSimbolo():
 
     opcoes = ['!', '@', '#', '$', '%', '¬', '&',
               '*', '(', ')', '-', '_', '=', '+', '§']
     return choice(opcoes)
 
 
-def gerarMaiusculo(quanto):
+def gerarMaiusculo():
 
     opcoes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
               'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -50,7 +51,7 @@ def gerarMaiusculo(quanto):
     return choice(opcoes)
 
 
-def gerarMinusculo(quanto):
+def gerarMinusculo():
 
     opcoes = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
               'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
