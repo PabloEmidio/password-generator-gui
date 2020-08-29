@@ -38,8 +38,8 @@ layout = [[sg.T('tamanho da senha:', size=(15, 1)),
 
           [sg.Text()],
           [sg.B('GERAR', size=(5, 1))],
-          [sg.In(key='RESP', size=(30, 2), default_text='',
-                 enable_events=True, readonly=True, text_color='Black'), sg.B('Copiar', key='COPIAR', button_color=['Black', 'lightGrey'])],
+          [sg.In(key='RESP', size=(30, 1), default_text='',
+                 enable_events=True, readonly=True, text_color='Black'), sg.B('Copiar', key='COPIAR', size=(5,1))],
           [sg.T('Gere senhas seguras', size=(30, 2), key='TEXT')]]
 window = sg.Window('Gerador de Senhas', layout)
 
