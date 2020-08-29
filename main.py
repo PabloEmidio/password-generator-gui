@@ -39,9 +39,8 @@ layout = [[sg.T('tamanho da senha:', size=(15, 1)),
           [sg.Text()],
           [sg.B('GERAR', size=(5, 1))],
           [sg.In(key='RESP', size=(30, 2), default_text='',
-                 enable_events=True, readonly=True, text_color='Black'), sg.B('Copiar Senha', key='COPIAR')],
+                 enable_events=True, readonly=True, text_color='Black'), sg.B('Copiar', key='COPIAR', button_color=['Black', 'lightGrey'])],
           [sg.T('Gere senhas seguras', size=(30, 2), key='TEXT')]]
-
 window = sg.Window('Gerador de Senhas', layout)
 
 while True:
@@ -98,8 +97,7 @@ while True:
     # evento gerar a senha
     if event == 'GERAR':
         if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
-            sg.Popup(
-                'Valores insuficientes\nAumente as variaveis ou dimunua o total')
+            sg.Popup('Valores insuficientes\nAumente as variaveis ou dimunua o total', title='AVISO')
         else:
             senha = GerarSenha(quantoNumero=int(values['NUMERO']), quantoSimbolo=int(
                 values['SIMBOLO']), quantoMaiusculo=int(values['MAIUSCULO']), quantoMinusculo=int(values['MINUSCULO']))
