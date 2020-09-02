@@ -7,4 +7,4 @@ Gerar senha aleatoriamente: Podendo escolher quantos caracteres gerar, essa opç
 Gerar senha por frase: Se você é daquele tipo de pessoa esquecida e baseia sua senha em palavras e frases que consegue lembrar, essa opção é feita para você. Selecionando a frase que você digitou e transformando em uma senha forte e dificil de ser descoberta, essa opção pode chegar a fornecer dezenas e até centenas de versões de senha para cada frase que você digitou
 
 # Independente da função que você escolher, terá maior segurança com suas senhas ao utilizar esse gerador de senhas 100% open-source
-# Criador por: Pablo Emidio
+Criador por: Pablo Emidio
