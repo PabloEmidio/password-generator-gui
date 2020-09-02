@@ -22,4 +22,4 @@
 
 
 # Independente da função que você escolher, terá maior segurança com suas senhas ao utilizar esse gerador de senhas 100% open-source
-Criador por: Pablo Emidio
+Criado por: Pablo Emidio
