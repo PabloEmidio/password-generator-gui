@@ -5,6 +5,7 @@ from time import sleep
 
 tamBottom = (1, 1)
 
+
 sg.theme('DarkBrown')
 
 layout = [
@@ -12,6 +13,7 @@ layout = [
         key='FRASE', text_color='Black', readonly=True)],
     [sg.Checkbox(text='Gerar senha por frase', key='MODE',
                  enable_events=True, pad=(('280', '3'), ('5', '20')))],
+    [sg.T('_'*60, text_color='Silver')],
     [sg.T('tamanho da senha:', size=(15, 1)),
      sg.In(key='TOTAL', size=(3, 2), default_text='12',
            enable_events=True, readonly=True, text_color='Black', ),
@@ -43,11 +45,12 @@ layout = [
      sg.B('-', size=tamBottom, key='MINUS-')],
 
     [sg.Text()],
-    [sg.B('GERAR', size=(5, 1))],
+    [sg.B('GERAR', size=(5, 1)), sg.T('', size=(30, 1), key='OUT')],
     [sg.In(key='RESP', size=(50, 1), default_text='',
            enable_events=True, readonly=True, text_color='Black'), sg.B('Copiar', key='COPIAR', size=(5, 1))],
     [sg.T('Gere senhas seguras', size=(30, 2), key='TEXT')],
-    [sg.B(image_filename='GUI-foto/info.png', button_color=(sg.theme_background_color(), sg.theme_background_color()), border_width=0, pad=(('380', '3'), ('0', '0')), key='AVISO')]
+    [sg.B(image_filename='GUI-foto/info.png', button_color=(sg.theme_background_color(),
+                                                            sg.theme_background_color()), border_width=0, pad=(('380', '3'), ('0', '0')), key='AVISO')]
 ]
 sg.Text()
 
@@ -123,6 +126,7 @@ while True:
                 window['MINUSCULO'].update(int(values['MINUSCULO']) - 1)
 
     # evento gerar a senha
+    window['OUT'].update('')
     if event == 'GERAR':
         if values['MODE'] == False:
             if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
@@ -132,16 +136,20 @@ while True:
                 senha = GerarSenhaRandom(quantoNumero=int(values['NUMERO']), quantoSimbolo=int(
                     values['SIMBOLO']), quantoMaiusculo=int(values['MAIUSCULO']), quantoMinusculo=int(values['MINUSCULO']))
                 window['RESP'].update(senha)
+
+                window['OUT'].update('Senha gerada aleatoriamente')
+
         else:
             if len(values['FRASE']) > 0:
                 window['RESP'].update(GerarSenhaByFrase(values['FRASE']))
+                window['OUT'].update('Senha gerada por frase')
 
     # copiar para a area de transferencia
     window['TEXT'].update('Gere senhas seguras')  # volta para o valor padrão
     if event == 'COPIAR' and values['RESP'] != '':
         clipboard.copy(values['RESP'])
         window['TEXT'].update('Senha copiada para a area de transferencia')
-    
+
     if event == 'AVISO':
         sg.popup('O gerador de senhas conta com duas opções principais:\n\nGerar senha aleatoriamente: Podendo escolher quantos caracteres gerar essa opção conta tambem com controle de quantos tipos de caracteres a senha irá conter e quanto caractere gerar em cada tipo separadamente, podendo gerar bilhões de combinações diferentes\n\nGerar senha por frase: Se você é daquele tipo de pessoa esquecida e baseia sua senha em palavras e frases que consegue se lembrar, essa opção é feita para você. Selecionando a frase que você digitou e transformando em uma senha forte e dificil de ser descoberta, essa opção pode chegar a fornecer dezenas e até centenas de versões de senha para a frase que você digitou\n\n\nIndependente da função que você escolher, terá maior segurança com suas senhas ao utilizar esse gerador de senhas 100% open-source\n\nCriado por: Pablo Emidio\nGithub:"https://github.com/PabloEmidio/gerador-de-senha-PySimpleGUI"', title='Informações')
 
