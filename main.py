@@ -1,13 +1,9 @@
 import PySimpleGUI as sg
-from password import GerarSenhaByFrase, GerarSenhaRandom
+from password import gerador_de_senhas as gerador
 import clipboard
-from time import sleep
 
 tamBottom = (1, 1)
-
-
 sg.theme('DarkBrown')
-
 layout = [
     [sg.T('Digita a frase:'), sg.In(
         key='FRASE', text_color='Black', readonly=True)],
@@ -52,8 +48,6 @@ layout = [
     [sg.B(image_filename='GUI-foto/info.png', button_color=(sg.theme_background_color(),
                                                             sg.theme_background_color()), border_width=0, pad=(('380', '3'), ('0', '0')), key='AVISO')]
 ]
-sg.Text()
-
 window = sg.Window('Gerador de Senhas', layout)
 
 while True:
@@ -133,15 +127,16 @@ while True:
                 sg.Popup(
                     'Valores insuficientes\nAumente as variaveis ou dimunua o total', title='AVISO')
             else:
-                senha = GerarSenhaRandom(quantoNumero=int(values['NUMERO']), quantoSimbolo=int(
-                    values['SIMBOLO']), quantoMaiusculo=int(values['MAIUSCULO']), quantoMinusculo=int(values['MINUSCULO']))
+                
+                quantos_numeros, quantos_simbolos, quantos_maiusculos, quantos_minusculos = int(values['NUMERO']), int(values['SIMBOLO']), int(values['MAIUSCULO']), int(values['MINUSCULO'])
+                senha = gerador.gerar_senha_aleatoriamente(quantos_numeros, quantos_simbolos, quantos_maiusculos, quantos_minusculos) 
                 window['RESP'].update(senha)
 
                 window['OUT'].update('Senha gerada aleatoriamente')
 
         else:
             if len(values['FRASE']) > 0:
-                window['RESP'].update(GerarSenhaByFrase(values['FRASE']))
+                window['RESP'].update(gerador.gerar_senha_por_frase(values['FRASE']))
                 window['OUT'].update('Senha gerada por frase')
 
     # copiar para a area de transferencia
