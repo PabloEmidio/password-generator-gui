@@ -148,7 +148,7 @@ while True:
         window['TEXT'].update('password copied to clipboard')
 
     if event == 'INFORMATION':
-        sg.popup('The password generator has two main alternative:\n\nGenerate randomly password: With full controle of how many and what characters to use for generating, this alternative can generate billions of random combinations\n\nGenerate password by phrase: If you are kind of person who forget every single security password, This alternative generates several password by a word or phrase from you choose\n\n\n\nCreated by: Pablo Emidio\nGithub: "https://github.com/PabloEmidio/password-generator-PySimpleGUI"', title='Information')
+        sg.popup('The password generator has two main alternative:\n\nGenerate randomly password: With full controle of how many and what characters to use for generating, this alternative can generate billions of random combinations\n\nGenerate password by phrase: If you are kind of person who forgets every single security password, This alternative generates several password by a word or phrase from you choose\n\n\n\nCreated by: Pablo Emidio\nGithub: "https://github.com/PabloEmidio/password-generator-PySimpleGUI"', title='Information')
 
 
 window.close()
