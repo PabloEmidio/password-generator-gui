@@ -19,11 +19,11 @@ layout = [
         sg.B('+', size=bottom_size, key='TOT+'),
         sg.B('-', size=bottom_size, key='TOT-')],
     [
-        sg.T('How many numbers: ', size=(15, 1)),
+        sg.T('Numbers: ', size=(15, 1)),
         sg.In(key='NUMBERS', size=(3, 2), default_text='3', enable_events=True, readonly=True, text_color='Black', ), 
         sg.B('+', size=bottom_size, key='NUM+'), sg.B('-', size=bottom_size, key='NUM-')],
     [
-        sg.T('How many symbols: ', size=(15, 1)),
+        sg.T('Symbols: ', size=(15, 1)),
         sg.In(key='SYMBOLS', size=(3, 2), default_text='3', enable_events=True, readonly=True, text_color='Black'),
         sg.B('+', size=bottom_size, key='SYMB+'),
         sg.B('-', size=bottom_size, key='SYMB-')],
