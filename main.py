@@ -1,57 +1,59 @@
+from password import password_generator as generator
+
 import PySimpleGUI as sg
-from password import gerador_de_senhas as gerador
 import clipboard
 
-tamBottom = (1, 1)
+bottom_size = (1, 1)
 sg.theme('DarkBrown')
 layout = [
-    [sg.T('Digita a frase:'), sg.In(
-        key='FRASE', text_color='Black', readonly=True)],
-    [sg.Checkbox(text='Gerar senha por frase', key='MODE',
-                 enable_events=True, pad=(('280', '3'), ('5', '20')))],
-    [sg.T('_'*60, text_color='Silver')],
-    [sg.T('tamanho da senha:', size=(15, 1)),
-     sg.In(key='TOTAL', size=(3, 2), default_text='12',
-           enable_events=True, readonly=True, text_color='Black', ),
-     sg.B('+', size=tamBottom, key='tot+'),
-     sg.B('-', size=tamBottom, key='tot-')],
+    [
+        sg.T('Type a phrase:'),
+        sg.In(key='PHRASE', text_color='Black', readonly=True)], 
+    [
+        sg.Checkbox(text='Generate password by phrase', key='MODE', enable_events=True, pad=(('280', '3'), ('5', '20')))],
+    [
+        sg.HorizontalSeparator(color='Black')],
+    [
+        sg.T('Password Lenght:', size=(15, 1)),
+        sg.In(key='TOTAL', size=(3, 2), default_text='12',enable_events=True, readonly=True, text_color='Black'),
+        sg.B('+', size=bottom_size, key='TOT+'),
+        sg.B('-', size=bottom_size, key='TOT-')],
+    [
+        sg.T('How many numbers: ', size=(15, 1)),
+        sg.In(key='NUMBERS', size=(3, 2), default_text='3', enable_events=True, readonly=True, text_color='Black', ), 
+        sg.B('+', size=bottom_size, key='NUM+'), sg.B('-', size=bottom_size, key='NUM-')],
+    [
+        sg.T('How many symbols: ', size=(15, 1)),
+        sg.In(key='SYMBOLS', size=(3, 2), default_text='3', enable_events=True, readonly=True, text_color='Black'),
+        sg.B('+', size=bottom_size, key='SYMB+'),
+        sg.B('-', size=bottom_size, key='SYMB-')],
+    [
+        sg.T('Uppercase letters: ', size=(15, 1)),
+        sg.In(key='UPPERCASE', size=(3, 2), default_text='3', enable_events=True, readonly=True, text_color='Black'),
+        sg.B('+', size=bottom_size, key='UPPER+'),
+        sg.B('-', size=bottom_size, key='UPPER-')],
+    [
+        sg.T('Lowercase letters: ', size=(15, 1)),
+        sg.In(key='LOWERCASE', size=(3, 2), default_text='3', enable_events=True, readonly=True, text_color='Black'),
+        sg.B('+', size=bottom_size, key='LOWER+'),
+        sg.B('-', size=bottom_size, key='LOWER-')],
+    [
+        sg.Text()],
+    [
+        sg.B('Generate', size=(7, 1)),
+        sg.T('', size=(30, 1), key='OUT')],
+    [
+        sg.In(key='ANSWER', size=(50, 1), default_text='', enable_events=True, readonly=True, text_color='Black'),
+        sg.B('Copy', key='COPY', size=(5, 1))],
+    [
+        sg.T('Generate security passwords', size=(30, 2), key='TEXT')],
+    [
+        sg.B(image_filename='.images/info.png', button_color=(sg.theme_background_color(), sg.theme_background_color()), border_width=0, pad=(('450', '0'), ('0', '5')), key='INFORMATION')]]
 
-    [sg.T('Quantos numeros: ', size=(15, 1)),
-     sg.In(key='NUMERO', size=(3, 2), default_text='3',
-           enable_events=True, readonly=True, text_color='Black', ),
-     sg.B('+', size=tamBottom, key='NUM+'),
-     sg.B('-', size=tamBottom, key='NUM-')],
 
-    [sg.T('Quantos simbolos: ', size=(15, 1)),
-     sg.In(key='SIMBOLO', size=(3, 2), default_text='3',
-           enable_events=True, readonly=True, text_color='Black'),
-     sg.B('+', size=tamBottom, key='SIMB+'),
-     sg.B('-', size=tamBottom, key='SIMB-')],
-
-    [sg.T('Letras Maiusculas: ', size=(15, 1)),
-     sg.In(key='MAIUSCULO', size=(3, 2), default_text='3',
-           enable_events=True, readonly=True, text_color='Black'),
-     sg.B('+', size=tamBottom, key='MAIUS+'),
-     sg.B('-', size=tamBottom, key='MAIUS-')],
-
-    [sg.T('Letras Minusculas: ', size=(15, 1)),
-     sg.In(key='MINUSCULO', size=(3, 2), default_text='3',
-           enable_events=True, readonly=True, text_color='Black'),
-     sg.B('+', size=tamBottom, key='MINUS+'),
-     sg.B('-', size=tamBottom, key='MINUS-')],
-
-    [sg.Text()],
-    [sg.B('GERAR', size=(5, 1)), sg.T('', size=(30, 1), key='OUT')],
-    [sg.In(key='RESP', size=(50, 1), default_text='',
-           enable_events=True, readonly=True, text_color='Black'), sg.B('Copiar', key='COPIAR', size=(5, 1))],
-    [sg.T('Gere senhas seguras', size=(30, 2), key='TEXT')],
-    [sg.B(image_filename='GUI-foto/info.png', button_color=(sg.theme_background_color(),
-                                                            sg.theme_background_color()), border_width=0, pad=(('380', '3'), ('0', '0')), key='AVISO')]
-]
-window = sg.Window('Gerador de Senhas', layout)
+window = sg.Window('Password generator', layout)
 
 while True:
-
     event, values = window.read()
 
     if event == sg.WIN_CLOSED or event == 'EXIT':
@@ -59,94 +61,94 @@ while True:
 
     if event == 'MODE':
         if values['MODE'] == True:
-            window['FRASE'].update(disabled=False, text_color='White')
+            window['PHRASE'].update(disabled=False, text_color='White')
             window['TOTAL'].update('0')
-            window['NUMERO'].update('0')
-            window['SIMBOLO'].update('0')
-            window['MAIUSCULO'].update('0')
-            window['MINUSCULO'].update('0')
+            window['NUMBERS'].update('0')
+            window['SYMBOLS'].update('0')
+            window['UPPERCASE'].update('0')
+            window['LOWERCASE'].update('0')
         else:
-            window['FRASE'].update(disabled=True, text_color='Black')
+            window['PHRASE'].update(disabled=True, text_color='Black')
             window['TOTAL'].update('12')
-            window['NUMERO'].update('3')
-            window['SIMBOLO'].update('3')
-            window['MAIUSCULO'].update('3')
-            window['MINUSCULO'].update('3')
+            window['NUMBERS'].update('3')
+            window['SYMBOLS'].update('3')
+            window['UPPERCASE'].update('3')
+            window['LOWERCASE'].update('3')
 
     if values['MODE'] == False:
 
-        # evento total
-        if event == 'tot+':
+        # modify total value event
+        if event == 'TOT+':
             window['TOTAL'].update(int(values['TOTAL']) + 1)
 
-        if event == 'tot-':
-            if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
+        if event == 'TOT-':
+            if int(values['TOTAL']) - (int(values['NUMBERS']) + int(values['SYMBOLS']) + int(values['UPPERCASE']) + int(values['LOWERCASE'])) > 0:
                 window['TOTAL'].update(int(values['TOTAL']) - 1)
 
-        # evento numero
+        # modify number value event
         if event == 'NUM+':
-            if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
-                window['NUMERO'].update(int(values['NUMERO']) + 1)
+            if int(values['TOTAL']) - (int(values['NUMBERS']) + int(values['SYMBOLS']) + int(values['UPPERCASE']) + int(values['LOWERCASE'])) > 0:
+                window['NUMBERS'].update(int(values['NUMBERS']) + 1)
 
         if event == 'NUM-':
-            if int(values['NUMERO']) > 0:
-                window['NUMERO'].update(int(values['NUMERO']) - 1)
+            if int(values['NUMBERS']) > 0:
+                window['NUMBERS'].update(int(values['NUMBERS']) - 1)
 
-        # evento simbolo
-        if event == 'SIMB+':
-            if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
-                window['SIMBOLO'].update(int(values['SIMBOLO']) + 1)
+        # modify symbol value event
+        if event == 'SYMB+':
+            if int(values['TOTAL']) - (int(values['NUMBERS']) + int(values['SYMBOLS']) + int(values['UPPERCASE']) + int(values['LOWERCASE'])) > 0:
+                window['SYMBOLS'].update(int(values['SYMBOLS']) + 1)
 
-        if event == 'SIMB-':
-            if int(values['SIMBOLO']) > 0:
-                window['SIMBOLO'].update(int(values['SIMBOLO']) - 1)
+        if event == 'SYMB-':
+            if int(values['SYMBOLS']) > 0:
+                window['SYMBOLS'].update(int(values['SYMBOLS']) - 1)
 
-        # evento letra maiuscula
-        if event == 'MAIUS+':
-            if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
-                window['MAIUSCULO'].update(int(values['MAIUSCULO']) + 1)
+        # modify uppercase value event
+        if event == 'UPPER+':
+            if int(values['TOTAL']) - (int(values['NUMBERS']) + int(values['SYMBOLS']) + int(values['UPPERCASE']) + int(values['LOWERCASE'])) > 0:
+                window['UPPERCASE'].update(int(values['UPPERCASE']) + 1)
 
-        if event == 'MAIUS-':
-            if int(values['MAIUSCULO']) > 0:
-                window['MAIUSCULO'].update(int(values['MAIUSCULO']) - 1)
+        if event == 'UPPER-':
+            if int(values['UPPERCASE']) > 0:
+                window['UPPERCASE'].update(int(values['UPPERCASE']) - 1)
 
-        # evento letra maiuscula
-        if event == 'MINUS+':
-            if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
-                window['MINUSCULO'].update(int(values['MINUSCULO']) + 1)
+        # modify lowercase value event
+        if event == 'LOWER+':
+            if int(values['TOTAL']) - (int(values['NUMBERS']) + int(values['SYMBOLS']) + int(values['UPPERCASE']) + int(values['LOWERCASE'])) > 0:
+                window['LOWERCASE'].update(int(values['LOWERCASE']) + 1)
 
-        if event == 'MINUS-':
-            if int(values['MINUSCULO']) > 0:
-                window['MINUSCULO'].update(int(values['MINUSCULO']) - 1)
+        if event == 'LOWER-':
+            if int(values['LOWERCASE']) > 0:
+                window['LOWERCASE'].update(int(values['LOWERCASE']) - 1)
 
-    # evento gerar a senha
+    # password generator event
     window['OUT'].update('')
-    if event == 'GERAR':
+    if event == 'Generate':
         if values['MODE'] == False:
-            if int(values['TOTAL']) - (int(values['NUMERO']) + int(values['SIMBOLO']) + int(values['MAIUSCULO']) + int(values['MINUSCULO'])) > 0:
+            if int(values['TOTAL']) - (int(values['NUMBERS']) + int(values['SYMBOLS']) + int(values['UPPERCASE']) + int(values['LOWERCASE'])) > 0:
                 sg.Popup(
-                    'Valores insuficientes\nAumente as variaveis ou dimunua o total', title='AVISO')
+                    'insufficient values\nIncrease the variables or decrease the total', title='INFORMATION')
             else:
                 
-                quantos_numeros, quantos_simbolos, quantos_maiusculos, quantos_minusculos = int(values['NUMERO']), int(values['SIMBOLO']), int(values['MAIUSCULO']), int(values['MINUSCULO'])
-                senha = gerador.gerar_senha_aleatoriamente(quantos_numeros, quantos_simbolos, quantos_maiusculos, quantos_minusculos) 
-                window['RESP'].update(senha)
+                howmany_numbers, howmany_symbols, howmany_lowercase, howmany_uppercase = int(values['NUMBERS']), int(values['SYMBOLS']), int(values['UPPERCASE']), int(values['LOWERCASE'])
+                password = generator.randomly_generate(howmany_numbers, howmany_symbols, howmany_lowercase, howmany_uppercase) 
+                window['ANSWER'].update(password)
 
-                window['OUT'].update('Senha gerada aleatoriamente')
+                window['OUT'].update('password generated randomly')
 
         else:
-            if len(values['FRASE']) > 0:
-                window['RESP'].update(gerador.gerar_senha_por_frase(values['FRASE']))
-                window['OUT'].update('Senha gerada por frase')
+            if len(values['PHRASE']) > 0:
+                window['ANSWER'].update(generator.generate_by_phrase(values['PHRASE']))
+                window['OUT'].update('password generated by phrase')
 
-    # copiar para a area de transferencia
-    window['TEXT'].update('Gere senhas seguras')  # volta para o valor padrão
-    if event == 'COPIAR' and values['RESP'] != '':
-        clipboard.copy(values['RESP'])
-        window['TEXT'].update('Senha copiada para a area de transferencia')
+    # copy to clipboard
+    window['TEXT'].update('Generate security passwords')  # return default value
+    if event == 'COPY' and values['ANSWER'] != '':
+        clipboard.copy(values['ANSWER'])
+        window['TEXT'].update('password copied to clipboard')
 
-    if event == 'AVISO':
-        sg.popup('O gerador de senhas conta com duas opções principais:\n\nGerar senha aleatoriamente: Podendo escolher quantos caracteres gerar essa opção conta tambem com controle de quantos tipos de caracteres a senha irá conter e quanto caractere gerar em cada tipo separadamente, podendo gerar bilhões de combinações diferentes\n\nGerar senha por frase: Se você é daquele tipo de pessoa esquecida e baseia sua senha em palavras e frases que consegue se lembrar, essa opção é feita para você. Selecionando a frase que você digitou e transformando em uma senha forte e dificil de ser descoberta, essa opção pode chegar a fornecer dezenas e até centenas de versões de senha para a frase que você digitou\n\n\nIndependente da função que você escolher, terá maior segurança com suas senhas ao utilizar esse gerador de senhas 100% open-source\n\nCriado por: Pablo Emidio\nGithub:"https://github.com/PabloEmidio/gerador-de-senha-PySimpleGUI"', title='Informações')
+    if event == 'INFORMATION':
+        sg.popup('The password generator has two main alternative:\n\nGenerate randomly password: With full controle of how many and what characters to use for generating, this alternative can generate billions of random combinations\n\nGenerate password by phrase: If you are kind of person who forget every single security password, This alternative generates several password by a word or phrase from you choose\n\n\n\nCreated by: Pablo Emidio\nGithub: "https://github.com/PabloEmidio/password-generator-PySimpleGUI"', title='Information')
 
 
 window.close()
