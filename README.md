@@ -1,25 +1,26 @@
-# Gerador de Senhas
+# Password Generator
 
-## O gerador de senhas conta com duas opções principais:
+## The password generator has two main alternative::
 
-### Gerar senha aleatoriamente:
-   Podendo escolher quantos caracteres gerar, essa opção conta tambem com controle de quantos tipos de caracteres a senha irá conter e quanto caracteres gerar em cada tipo, podendo gerar bilhões de combinações diferentes;
+### Generate randomly password:
+
+   With full controle of how many and what characters to use for generating, this alternative can generate billions of random combinations
   
-  ![Alt](https://github.com/PabloEmidio/gerador-de-senha-PySimpleGUI/blob/master/GUI-foto/aleatorio.png "EXEMPLO")
+  ![Alt](./.images/example.png "Example")
 
 
 
 
 
-### Gerar senha por frase:
-   Se você é daquele tipo de pessoa esquecida e baseia sua senha em palavras e frases que consegue lembrar, essa opção é feita para você. Selecionando a frase que você digitou e transformando em uma senha forte e dificil de ser descoberta, essa opção pode chegar a fornecer dezenas e até centenas de versões de senha para cada frase que você digitou
+### Generate password by phrasee:
+  If you are kind of person who forgets every single security password, This alternative generates several password by a word or phrase from you choose.
 
-![Alt](https://github.com/PabloEmidio/gerador-de-senha-PySimpleGUI/blob/master/GUI-foto/porfrase.png "EXEMPLO")
-
-
+![Alt](./.images/example_with_phrase.png "Example")
 
 
 
 
-# Independente da função que você escolher, terá maior segurança com suas senhas ao utilizar esse gerador de senhas 100% open-source
+
+
+# Whatever alternative you choose, you will be greater security generating your passwords using this open-source generator
 Criado por: Pablo Emidio
