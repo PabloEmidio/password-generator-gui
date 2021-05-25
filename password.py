@@ -1,32 +1,32 @@
 from random import sample, shuffle
 import string
 
-class GeradorDeSenhas:
+class PasswordGenerator:
     def __init__(self):
-        self.numeros = string.digits
-        self.letras_maiusculas = string.ascii_uppercase
-        self.letras_minusculas = string.ascii_lowercase
-        self.simbolos = string.punctuation
+        self.numbers = string.digits
+        self.uppercase_letters = string.ascii_uppercase
+        self.lowercase_letters = string.ascii_lowercase
+        self.symbols = string.punctuation
         
         
-    def gerar_senha_aleatoriamente(self, quantos_numeros, quantos_simbolos, quantos_maiusculos, quantos_minusculos) -> str:
-        numeros_gerados = ''.join(sample(self.numeros, quantos_numeros))
-        simbolos_gerados = ''.join(sample(self.simbolos, quantos_simbolos))
-        letras_maiusculas_geradas = ''.join(sample(self.letras_maiusculas, quantos_maiusculos))
-        letras_minusculas_geradas = ''.join(sample(self.letras_minusculas, quantos_minusculos))
-        soma_dos_elemetentos_gerados = numeros_gerados + simbolos_gerados + letras_maiusculas_geradas + letras_minusculas_geradas
-        senha = [i for i in soma_dos_elemetentos_gerados]
-        shuffle(senha)
-        senha = ''.join(senha)
-        return senha
+    def randomly_generate(self, howmany_numbers, howmany_symbols, howmany_uppercase, howmany_lowercase) -> str:
+        numbers_generated = ''.join(sample(self.numbers, howmany_numbers))
+        symbols_generated = ''.join(sample(self.symbols, howmany_symbols))
+        uppercase_letters_generated = ''.join(sample(self.uppercase_letters, howmany_uppercase))
+        lowercase_letters_generated = ''.join(sample(self.lowercase_letters, howmany_lowercase))
+        all_generated_elements = numbers_generated + symbols_generated + uppercase_letters_generated + lowercase_letters_generated
+        password = [i for i in all_generated_elements]
+        shuffle(password)
+        password = ''.join(password)
+        return password
     
     
-    def gerar_senha_por_frase(self, frase) -> str:
+    def generate_by_phrase(self, phrase) -> str:
         import unidecode
-        frase = unidecode.unidecode(frase)
-        senha = frase.lower()
+        phrase = unidecode.unidecode(phrase)
+        password = phrase.lower()
         
-        substitutos = {
+        to_replacement = {
             ' ': ['-', '_'],
             'a': ['a', 'A', '@', '4'],
             'b': ['b', 'B'],
@@ -56,11 +56,11 @@ class GeradorDeSenhas:
             'z': ['z', 'Z']
             }
         
-        senha = senha.replace(' ', ''.join(sample(substitutos[' '], 1)))
-        for i in range(len(senha)):
-            if senha[i].isalpha():
-                senha = senha.replace(senha[i], ''.join(sample(substitutos[senha[i].lower()], 1)), 1)
-        return senha
+        password = password.replace(' ', ''.join(sample(to_replacement[' '], 1)))
+        for i in range(len(password)):
+            if password[i].isalpha():
+                password = password.replace(password[i], ''.join(sample(to_replacement[password[i].lower()], 1)), 1)
+        return password
 
 
-gerador_de_senhas = GeradorDeSenhas()
+password_generator = PasswordGenerator()
