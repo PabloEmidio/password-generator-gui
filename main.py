@@ -5,6 +5,7 @@ import clipboard
 
 bottom_size = (1, 1)
 sg.theme('DarkBrown')
+
 layout = [
     [
         sg.T('Type a phrase:'),
@@ -54,7 +55,7 @@ window = sg.Window('Password generator', layout)
 while True:
     event, values = window.read()
 
-    if event == sg.WIN_CLOSED or event == 'EXIT':
+    if event == sg.WIN_CLOSED:
         break
 
     if event == 'MODE':
