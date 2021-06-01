@@ -23,4 +23,4 @@
 
 
 # Whatever alternative you choose, you will be greater security generating your passwords using this open-source generator
-Criado por: Pablo Emidio
+Created by: Pablo Emidio
