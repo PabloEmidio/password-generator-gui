@@ -38,8 +38,6 @@ layout = [
         sg.B('+', size=bottom_size, key='LOWER+'),
         sg.B('-', size=bottom_size, key='LOWER-')],
     [
-        sg.Text()],
-    [
         sg.B('Generate', size=(7, 1)),
         sg.T('', size=(30, 1), key='OUT')],
     [
